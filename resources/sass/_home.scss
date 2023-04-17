@@ -1,0 +1,23 @@
+@import "navbar";
+@import "sideBar";
+@import "content";
+
+@include media-breakpoint-down (sm) {
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 104;
+        width: 100vw;
+        height: 100vh;
+        background-color: #313a46;
+        opacity: 0.5;
+    }
+
+    .close {
+        .overlay {
+            opacity: 0;
+            z-index: 50;
+        }
+    }
+}

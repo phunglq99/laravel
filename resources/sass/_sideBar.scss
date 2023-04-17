@@ -1,0 +1,271 @@
+.sidebar {
+    width: $sidebar-nav-w-m-l;
+    padding-bottom: 72px;
+    margin-top: $sidebar-nav-w-m-x;
+    background-color: $bg-sidebar;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: all 0.25s ease-in-out;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        visibility: hidden;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $bg-sidebar;
+        visibility: hidden;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $text-sidebar;
+        border-radius: 12px;
+        border: 2px solid $bg-sidebar;
+        visibility: hidden;
+    }
+
+    &:hover {
+        &::-webkit-scrollbar,
+        &::-webkit-scrollbar-track,
+        &::-webkit-scrollbar-thumb {
+            visibility: visible;
+        }
+    }
+    // click toggle
+    .sidebar-logo {
+        transition: all 0.25s ease-in-out;
+        &__sm {
+            display: none;
+        }
+    }
+
+    &-logo {
+        padding: 24px 59px;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        width: $sidebar-nav-w-m-l;
+        background-color: $bg-sidebar;
+
+        img {
+            height: 22px;
+        }
+    }
+
+    &-item {
+
+        &__active {
+            color: white;
+            font-weight: 500;
+        }
+    }
+
+    &-nav {
+        // transition: all 0.25s ease-in-out;
+
+        &__link {
+            justify-content: space-between;
+            gap: 0 30px;
+            color: $text-sidebar;
+
+            &:hover {
+                color: $text-sidebar-hover;
+            }
+
+            & > .sidebar-noti {
+                display: inline-block;
+                padding: 4px 8px;
+                font-size: 11.25px;
+                color: white;
+                background-color: rgb(10, 207, 151);
+                line-height: initial;
+                border-radius: 8px;
+            }
+        }
+
+        &__icon > svg {
+            color: white;
+            min-width: 50px;
+            height: 19px;
+            display: inline-block;
+            margin: 0 auto
+        }
+
+        &__icon-more {
+            width: 12px;
+            position: absolute;
+            right: 12px;
+        }
+
+        &__section {
+            padding: 0 20px 0 20px;
+        }
+
+        &__item {
+            padding: 15px 10px;
+            a[aria-expanded="true"] {
+                .sidebar-nav__first {
+                    color: white;
+                }
+            }
+
+        }
+
+        &__first {
+            font-size: 15px;
+            font-weight: 500;
+            flex: auto;
+            line-height: calc(22.5/15);
+        }
+
+        &__second {
+            margin-left: 79px;
+
+            & > li {
+                padding: 9px 0;
+
+                &:hover {
+                    color: $text-sidebar-hover;
+                }
+            }
+        }
+    }
+
+    .sidebar-in {
+        position: absolute;
+        top: 4px;
+        color: white;
+        right: 8px;
+        font-size: 22px;
+        visibility: hidden;
+    }
+}
+
+// Close
+.close {
+    .sidebar {
+        position: absolute !important;
+        width: $sidebar-nav-w-m-x;
+        overflow-x: unset;
+        overflow-y: unset;
+        height: max-content;
+
+        .sidebar-nav__section,
+        .sidebar-nav__first,
+        .sidebar-noti,
+        .sidebar-nav__icon-more,
+        .sidebar-noti__new,
+        .sidebar-nav__second {
+            visibility: hidden;
+        }
+
+        .sidebar-inherit {
+            position: relative;
+            padding-bottom: 72px;
+            background-color: $bg-sidebar;
+        }
+
+        .sidebar-logo {
+            background-color: $bg-sidebar;
+            width: $sidebar-nav-w-m-x;
+            padding: 24px 20px 27px;
+            z-index: 5;
+        }
+
+        .sidebar-logo__sm {
+            display: block;
+        }
+
+        .sidebar-logo__lg {
+            display: none;
+        }
+
+        .sidebar-nav__item {
+            position: relative;
+            pointer-events: auto;
+            padding: 0;
+
+            &:hover ~ .sidebar-nav__item{
+                pointer-events: none
+            }
+
+            &:hover .collapse > .sidebar-nav__second{
+                visibility: visible;
+                background-color: $bg-sidebar;
+                margin-left: 70px;
+                padding-left: 20px;
+                width: calc($sidebar-nav-w-m-l - 70px);
+            }
+
+            &:hover > .sidebar-nav__link > .sidebar-nav__first, 
+            &:hover > .sidebar-nav__link > .sidebar-noti,
+            &:hover > .sidebar-nav__link > .sidebar-nav__icon-more {
+                visibility: visible;
+            }
+
+            &:hover > .sidebar-nav__link  {
+                position: relative;
+                width: $sidebar-nav-w-m-l;
+                color: white;
+                background-color: $bg-hover-sidebar
+            }
+
+            .sidebar-nav__link {
+                padding: 15px 0 15px 10px !important;
+
+                & > span {
+                    height: 22.5px;
+                }
+            }
+
+            .sidebar-nav__second {
+                position: absolute;
+            }
+        }
+    }
+
+        // toggle navbar
+        .navbar-container {
+            margin-left: $sidebar-nav-w-m-x ;
+        }
+
+        // Main content
+        .main-content {
+            margin-left: $sidebar-nav-w-m-x;
+        }
+
+        .display {
+            display: block;
+        }
+}
+
+
+@include media-breakpoint-down (sm) {
+    .sidebar {
+        width: $sidebar-nav-w-m-l;
+        margin-left: 0;
+        border-color: transparent;
+        opacity: 1;
+        z-index: 1000;
+        
+        &-in {
+            visibility: visible !important;
+        }
+    }
+
+    .navbar-container {
+        margin-left: 0 !important;
+    }
+
+    .main-content  {
+        margin-left: 0 !important;
+    }
+
+    .close {
+        .sidebar {
+            margin-left: calc($sidebar-nav-w-m-l * -1);
+            border-color: transparent;
+            opacity: 0;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+.todo {
+
+    .alert {
+        position: absolute;
+        right: 0;
+        top: 40px;
+        transition: all 150ms linear;
+
+        &.hide {
+            position: absolute;
+            right: 0;
+            top: 40px;
+            transform: translateX(200%);
+        }
+    }
+}

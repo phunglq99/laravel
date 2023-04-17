@@ -1,0 +1,26 @@
+* {
+    scroll-behavior: smooth;
+    font-family: 'Nunito', sans-serif!important;
+}
+
+body {
+    overflow-y: scroll;
+    background-color: #e5e7ed;
+}
+
+.text-sidebar__item {
+    color: $text-sidebar;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: calc(22.5/15);
+    letter-spacing: normal;
+}
+
+.text-sidebar {
+    letter-spacing: .05em;
+    color: $text-sidebar;
+    font-size: 11px;
+    line-height: calc(22/15);
+    margin: 0 0 16px;
+    font-weight: 700;
+}
