@@ -1,7 +1,7 @@
 @extends('home')
 @section('title', 'TODO')
 @section('todo')
-    <section class="todo vh-100" style="background-color: #eee;">
+    <section class="vh-100" style="background-color: #eee;">
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center">
             <div class="col col-lg-12 col-xl-12">
@@ -12,10 +12,17 @@
                   <a href="{{ route('todo.add') }}" class="btn btn-secondary">Create tasks</a>
 
                   @if (session('success'))
-                    <div class="alert alert-success" role="alert">
+                    <div class="todo alert alert-success" role="alert">
                       {{ session('success') }}
                     </div>
                   @endif
+
+                  @if ($errors->any())
+                    <div class="todo alert alert-danger" role="alert">
+                        {{ $errors->first() }}
+                    </div>
+                   @endif
+
                   <table class="table table-striped table-hover my-4">
                     <thead class="border-bottom border-dark">
                       <tr class="fw-bold">
@@ -42,8 +49,8 @@
                             </td>
                             <td>
                               <a href="{{ route('todo.show', $todo->id) }}" class="btn btn-outline-warning me-3">View</a>
-                              <a href="#" class="btn btn-outline-info me-2">Edit</a>
-                              <form action="" class="d-inline-block">
+                              <a href="{{ route('todo.edit', $todo->id) }}" class="btn btn-outline-info me-2">Edit</a>
+                              <form action="" class="d-inline-block" method="POST">
                                 <input type="hidden" name= "todo_id" class="btn btn-outline-success ms-1" value="{{ $todo->id }}" />
                                 <input type="submit" class="btn btn-outline-danger ms-1" value="Delete" />
                               </form>

@@ -7,7 +7,7 @@
     <h1 class="fs-4 mb-4">{{ $add }}</h1>
 
     @if ($errors->any())
-      <div class="alert alert-danger mb-4">
+      <div class="add alert alert-danger mb-4">
           <ul>
               @foreach ($errors->all() as $error)
                   <li class="mb-2">{{ $error }}</li>

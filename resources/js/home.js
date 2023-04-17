@@ -35,7 +35,7 @@ var overLay =  document.querySelector('.overlay');
       wrapper.classList.add('close');
   })
 
-  var $alertSecond = $('.alert');
+  var $alertSecond = $('.todo.alert');
   var timeoutAlert = setTimeout(function() {
       $alertSecond.removeClass('show').addClass('hide');
       setTimeout(function() {

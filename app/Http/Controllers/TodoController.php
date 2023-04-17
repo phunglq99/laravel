@@ -27,12 +27,17 @@ class TodoController extends Controller
         ]);
     }
 
-    public function edit() {
-        return view('todos.edit');
+    public function edit($id) {
+        return $id;
+        // return view('todos.edit');
     }
 
-    public function store(TodoRequest $req) {
-    //    $req->validated();
+    public function store(Request $req) {
+        $req->validate([
+            'title' => ['required', 'string'],
+            'description' => ['required', 'string', 'min:5', 'max:500'],
+        ]);
+
        Todo::create([
             'title' => $req->title,
             'description' => $req->description,
@@ -48,7 +53,7 @@ class TodoController extends Controller
         $todoShow = Todo::find($id);
 
         if(! $todoShow) {
-            return redirect()->route('todo')->withErrors([
+            return redirect('todo')->withErrors([
                 'error' => 'Invalid todo task'
             ]);
         }
