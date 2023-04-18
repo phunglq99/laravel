@@ -84,7 +84,7 @@ class TodoController extends Controller
         $todoUpdate = Todo::find($req->todo_id);
 
         //Bắt lỗi khi không update dữ liệu
-        if (!$todoUpdate->isDirty()) {
+        if ($todoUpdate->title == $req->input('title') && $todoUpdate->description == $req->input('description') && $todoUpdate->is_complete == (int)$req->input('is_complete')) {
             return redirect()->back()->withErrors([
                 'error' => 'No data changes'
             ]);

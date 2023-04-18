@@ -7,7 +7,7 @@
         @method('PUT')
         <h1 class="fs-4 mb-4">Edit Form</h1>
 
-        @if ($errors->any())
+        {{-- @if ($errors->any())
             <div class="add alert alert-danger mb-4">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -15,7 +15,7 @@
                     @endforeach
                 </ul>
             </div>
-        @endif
+        @endif --}}
 
         <input type="hidden" name="todo_id" value="{{ $todoEdit->id }}">
         <div class="mb-3">
@@ -23,7 +23,7 @@
             @error('title')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            <input type="text" name="title" class="form-control" value="{{ $todoEdit->title }}"/>
+            <input type="text" name="title" class="form-control" value="{{ old('title' , $todoEdit->title) }}"/>
         </div>
 
         <div class="mb-3">
@@ -31,7 +31,7 @@
             @error('description')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            <textarea class="form-control" name="description" cols="5" rows="5">{{ trim($todoEdit->description) }}</textarea>
+            <textarea class="form-control" name="description" cols="5" rows="5">{{ old('description' , trim($todoEdit->description)) }}</textarea>
         </div>
 
         <div class="mb-3">
