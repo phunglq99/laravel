@@ -17,6 +17,12 @@
             </div>
         @endif --}}
 
+        @if ($errors->has('error'))
+            <div class="alert alert-danger">
+                {{ $errors->first('error') }}
+            </div>
+        @endif
+
         <input type="hidden" name="todo_id" value="{{ $todoEdit->id }}">
         <div class="mb-3">
             <label class="form-label">Title</label>
