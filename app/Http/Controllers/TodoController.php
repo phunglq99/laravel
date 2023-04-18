@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TodoRequest;
+// use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 
@@ -25,11 +25,6 @@ class TodoController extends Controller
         return view('todos.add', [
             'add' => $addTodo
         ]);
-    }
-
-    public function edit($id) {
-        return $id;
-        // return view('todos.edit');
     }
 
     public function store(Request $req) {
@@ -61,5 +56,52 @@ class TodoController extends Controller
         return view('todos.show', [
             'todoShow' => $todoShow
         ]);
+    }
+
+    
+    public function edit($id) {
+        $todoEdit = Todo::find($id);
+
+        if(! $todoEdit) {
+            return redirect('todo')->withErrors([
+                'error' => 'Invalid todo task'
+            ]);
+        }
+        // return $id   //test
+        return view('todos.edit', [
+            'todoEdit' => $todoEdit
+        ]);
+    }
+
+    public function update(Request $req) {
+        $todoUpdate = Todo::find($req->todo_id);
+
+        if(! $todoUpdate) {
+            return redirect('todo')->withErrors([
+                'error' => 'Invalid todo task'
+            ]);
+        }
+
+        $todoUpdate->update([
+            'title' => $req->title,
+            'description' => $req->description,
+            'is_complete' => $req->is_complete
+        ]);
+
+        return redirect('todo')->with('success', 'Todo update successfully!');
+    }
+
+    public function delete(Request $req) {
+        $todoDelete = Todo::find($req->todo_id);
+
+        if(! $todoDelete) {
+            return redirect('todo')->withErrors([
+                'error' => 'Invalid todo task'
+            ]);
+        }
+
+        $todoDelete->delete();
+
+        return redirect('todo')->with('success', 'Todo delete successfully!');
     }
 }
