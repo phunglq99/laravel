@@ -31,16 +31,23 @@ class TodoController extends Controller
         $req->validate([
             'title' => ['required', 'string'],
             'description' => ['required', 'string', 'min:5', 'max:500'],
+            'is_complete' => ['required']
         ]);
 
        Todo::create([
             'title' => $req->title,
             'description' => $req->description,
-            'is_complete' => 0,
+            'is_complete' => $req->is_complete,
        ]);
 
     //    $req->session()->flashMessage('alert-suscess','Todo Created Successfully');
        return redirect('todo')->with('success', 'Todo created successfully!');
+    }
+
+    public function showErr() {
+        return redirect('todo')->withErrors([
+            'error' => 'Invalid todo task'
+        ]);
     }
 
     public function show($id) {
@@ -48,9 +55,7 @@ class TodoController extends Controller
         $todoShow = Todo::find($id);
 
         if(! $todoShow) {
-            return redirect('todo')->withErrors([
-                'error' => 'Invalid todo task'
-            ]);
+            return $this->showErr();
         }
         // return $id   //test
         return view('todos.show', [
@@ -62,9 +67,7 @@ class TodoController extends Controller
         $todoEdit = Todo::find($id);
 
         if(! $todoEdit) {
-            return redirect('todo')->withErrors([
-                'error' => 'Invalid todo task'
-            ]);
+            return $this->showErr();
         }
         // return $id   //test
         return view('todos.edit', [
@@ -73,12 +76,22 @@ class TodoController extends Controller
     }
 
     public function update(Request $req) {
+        $req->validate([
+            'title' => ['required', 'string'],
+            'description' => ['required', 'string', 'min:5', 'max:500'],
+        ]);
+
         $todoUpdate = Todo::find($req->todo_id);
 
-        if(! $todoUpdate) {
-            return redirect('todo')->withErrors([
-                'error' => 'Invalid todo task'
+        //Bắt lỗi khi không update dữ liệu
+        if (!$todoUpdate->isDirty()) {
+            return redirect()->back()->withErrors([
+                'error' => 'No data changes'
             ]);
+        }
+
+        if(! $todoUpdate) {
+            return $this->showErr();
         }
 
         $todoUpdate->update([
@@ -94,9 +107,7 @@ class TodoController extends Controller
         $todoDelete = Todo::find($req->todo_id);
 
         if(! $todoDelete) {
-            return redirect('todo')->withErrors([
-                'error' => 'Invalid todo task'
-            ]);
+            return $this->showErr();
         }
 
         $todoDelete->delete();

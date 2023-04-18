@@ -6,23 +6,34 @@
         @csrf
         <h1 class="fs-4 mb-4">{{ $add }}</h1>
 
-        @if ($errors->any())
-            <div class="add alert alert-danger mb-4">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li class="mb-2">{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         <div class="mb-3">
             <label class="form-label">Title</label>
+            @error('title')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <input type="text" name="title" class="form-control" />
         </div>
+
         <div class="mb-3">
             <label class="form-label">Description</label>
+            @error('description')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <textarea class="form-control" name="description" cols="5" rows="5"></textarea>
         </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Status</label>
+            @error('is_complete')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <select class="form-select" name="is_complete">
+                <option selected disabled> Open this select menu </option>
+                <option value="0"> In Complete </option>
+                <option value="1"> Complete </option>
+            </select>
+        </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 @endsection

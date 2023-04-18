@@ -27,7 +27,7 @@ Route::namespace('App\Http\Controllers') -> group(function() {
         Route::get('todo/add', 'add') -> name('add');
         Route::post('todo/store', 'store') -> name('store');
         Route::get('todo/show/{id}', 'show') -> name('show');
-        Route::get('todo/{id}/edit', 'edit') -> name('edit');
+        Route::get('todo/edit/{id}', 'edit') -> name('edit');
         Route::put('todo/update', 'update') -> name('update');
         Route::delete('todo/delete', 'delete') -> name('delete');
     });
