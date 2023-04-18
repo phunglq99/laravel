@@ -34,6 +34,7 @@ Route::namespace('App\Http\Controllers') -> group(function() {
 });
 
 
+
 // Route::get ('product', [App\Http\Controllers\ProductsController::class, 'index'])->name('product.index');
 
 

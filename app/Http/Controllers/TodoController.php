@@ -58,7 +58,6 @@ class TodoController extends Controller
         ]);
     }
 
-    
     public function edit($id) {
         $todoEdit = Todo::find($id);
 
