@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TodoController;
+use App\Http\Controllers\TodosController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,16 +24,18 @@ Route::namespace('App\Http\Controllers') -> group(function() {
         Route::get ('test', 'test') -> name('test');
     });
 
-    Route::name('todo.') -> controller(TodoController::class) -> group(function() {
-        Route::get('todo', 'index') -> name('index');
-        Route::get('todo/add', 'add') -> name('add');
-        Route::post('todo/store', 'store') -> name('store');
-        Route::get('todo/show/{id}', 'show') -> name('show');
-        Route::get('todo/edit/{id}', 'edit') -> name('edit');
-        Route::put('todo/update', 'update') -> name('update');
-        Route::delete('todo/delete', 'delete') -> name('delete');
-    });
+    // Route::name('todo.') -> controller(TodoController::class) -> group(function() {
+    //     Route::get('todo', 'index') -> name('index');
+    //     Route::get('todo/add', 'add') -> name('add');
+    //     Route::post('todo/store', 'store') -> name('store');
+    //     Route::get('todo/show/{id}', 'show') -> name('show');
+    //     Route::get('todo/edit/{id}', 'edit') -> name('edit');
+    //     Route::put('todo/update', 'update') -> name('update');
+    //     Route::delete('todo/delete', 'delete') -> name('delete');
+    // });
 });
+Route::resource('todos', TodosController::class);
+
 
 
 

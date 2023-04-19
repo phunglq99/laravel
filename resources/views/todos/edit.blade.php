@@ -1,8 +1,8 @@
 @extends('home')
 @section('title', 'ADD TODO')
 @section('todo')
-    <a href="{{ route('todo.index') }}" class="text-decoration-none text-dark fs-2 mb-5 d-block">Todo</a>
-    <form class="container py-5 h-100" action="{{ route('todo.update') }}" method="POST">
+    <a href="{{ route('todos.index') }}" class="text-decoration-none text-dark fs-2 mb-5 d-block">Todo</a>
+    <form class="container py-5 h-100" action="{{ route('todos.update', $todoEdit->id) }}" method="POST">
         @csrf
         @method('PUT')
         <h1 class="fs-4 mb-4">Edit Form</h1>
