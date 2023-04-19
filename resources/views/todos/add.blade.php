@@ -5,7 +5,7 @@
     <form class="container py-5 h-100" method="POST" action="{{ route('todo.store') }}">
         @csrf
         <h1 class="fs-4 mb-4">{{ $add }}</h1>
-
+        
         <div class="mb-3">
             <label class="form-label">Title</label>
             @error('title')

@@ -8,14 +8,24 @@ use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
-    public function index() {
+    public function index(Request $req) {
 
-        $todos = Todo::paginate(10);
         // $todosAll = Todo::All();
+        $todoSearchTerm = $req->input('searchTerm');
 
-        return view('todos.todo', [
-            'todos' => $todos,
-        ]);
+        if (!empty($todoSearchTerm)) {
+            $todoSearch = Todo::where('title', 'like', '%' . $todoSearchTerm . '%')->paginate(10);
+            return view('todos.todo', [
+                'todoSearch' => $todoSearch,
+                'todoSearchTerm' => $todoSearchTerm
+            ]);
+        } else {
+            $todos = Todo::paginate(10);
+            return view('todos.todo', [
+                'todos' => $todos,
+                'todoSearchTerm' => ''
+            ]);
+        }
     }
 
     public function add() {
@@ -23,7 +33,7 @@ class TodoController extends Controller
         $addTodo = 'Add Todo';
 
         return view('todos.add', [
-            'add' => $addTodo
+            'add' => $addTodo,
         ]);
     }
 
@@ -84,7 +94,7 @@ class TodoController extends Controller
         $todoUpdate = Todo::find($req->todo_id);
 
         //Bắt lỗi khi không update dữ liệu
-        if (!$todoUpdate->isDirty()) {
+        if ($todoUpdate->title == $req->input('title') && $todoUpdate->description == $req->input('description') && $todoUpdate->is_complete == (int)$req->input('is_complete')) {
             return redirect()->back()->withErrors([
                 'error' => 'No data changes'
             ]);
@@ -114,4 +124,15 @@ class TodoController extends Controller
 
         return redirect('todo')->with('success', 'Todo delete successfully!');
     }
+
+    // public function search(Request $req) {
+
+    //     // $todoSearchTerm = $req->input('searchTerm');
+    //     // $todoSearch = Todo::where('title', 'like', '%' . $todoSearchTerm . '%')->get();
+
+    //     $todoSearch = 'test';
+    //     return view('todos.add', [
+    //         'todoSearch' => $todoSearch
+    //     ]);
+    // }
 }
