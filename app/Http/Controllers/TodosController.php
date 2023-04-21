@@ -14,11 +14,17 @@ class TodosController extends Controller
     {
         $searchTerm = $request->get('searchTerm');
 
+        $displayList = $request->get('displayList') ?? 10;
+
+
         $todos = Todo::when( $searchTerm, function($query, $searchTerm) {
             return $query->where('title', 'like', '%' .  $searchTerm . '%');
-        }) -> paginate(10);
+        }) -> paginate($displayList);
 
-        $todos->appends(['searchTerm' => $searchTerm]);
+        $todos->appends([
+            'searchTerm' => $searchTerm,
+            'displayList' => $displayList
+        ]);
 
         return view('todos.todo', [
             'todos' => $todos,
@@ -60,7 +66,7 @@ class TodosController extends Controller
     }
 
     public function showErr() {
-        return redirect('todo')->withErrors([
+        return redirect('todos')->withErrors([
             'error' => 'Invalid todo task'
         ]);
     }

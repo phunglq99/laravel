@@ -24,6 +24,12 @@ Route::namespace('App\Http\Controllers') -> group(function() {
         Route::get ('test', 'test') -> name('test');
     });
 
+    Route::name('login.') -> controller(AuthController::class) -> group(function() {
+        Route::get ('login', 'index') -> name('index');
+        Route::get ('register', 'register') -> name('register');
+        Route::post ('registerPost', 'registerPost') -> name('registerPost');
+    });
+
     // Route::name('todo.') -> controller(TodoController::class) -> group(function() {
     //     Route::get('todo', 'index') -> name('index');
     //     Route::get('todo/add', 'add') -> name('add');

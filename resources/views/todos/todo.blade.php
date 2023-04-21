@@ -12,7 +12,17 @@
                             <a href="{{ route('todos.index') }}" class="d-block text-center my-3 pb-3 fw-bold fs-3 text-decoration-none">TO DO APP</a>
                             <div class="d-flex justify-content-between">
                                 <a href="{{ route('todos.create') }}" class="btn btn-secondary">Create tasks</a>
-                                <form class="d-flex" action="{{ route('todos.index') }}" method="get">
+                                <form class="d-flex" action="{{ route('todos.index') }}" method="get" id="searchForm">
+                                    <select class="form-select me-5" id="displayList" name="displayList">
+                                        <option selected disabled> Select </option>
+                                        @php
+                                            $valueItem = [ 5, 10 ,15 ];
+                                        @endphp
+                                        @foreach ($valueItem as $value)
+                                            <option {{ request()->get('displayList') == $value ? 'selected' : '' }} value={{ $value }}>{{  $value }}</option>
+                                        @endforeach
+
+                                      </select>
                                     <input class="form-control me-2" name="searchTerm" type="search" placeholder="Search" aria-label="Search" value="{{ request()->input('searchTerm') }}">
                                     <button class="btn btn-outline-success" type="submit">Search</button>
                                 </form>
