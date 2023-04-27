@@ -22,34 +22,35 @@
             <div class="container h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                        @if (session('success'))
-                                <div class="todo alert alert-success" role="alert">
-                                    {{ session('success') }}
-                                </div>
-                        @endif
-                        {{-- Alert error --}}
-                        @if ($errors->has('email'))
-                            <div class="alert alert-danger">
-                                {{ $errors->first('email') }}
-                            </div>
-                        @endif
                         <div class="card register" style="border-radius: 15px;">
                             <div class="card-body p-5">
                                 <img src="https://coderthemes.com/hyper/saas/assets/images/logo.png" alt="">
                                 <div class="d-flex mb-4 justify-content-center align-items-center mt-3">
                                     <h2 class="text-uppercase text-center fs-5 fw-bold">Sing in</h2>
                                 </div>
+                                @if (session('success'))
+                                <div class="todo alert alert-success py-2" role="alert">
+                                    {{ session('success') }}
+                                </div>
+                                @endif
+                                {{-- Alert error --}}
+                                @if ($errors->any())
+                                    <div class="todo alert alert-danger py-2" role="alert">
+                                        {{ $errors->first('email') ? $errors->first('email') : $errors->first('password') }}
+                                    </div>
+                                @endif
 
-                                <form>
+                                <form action="{{ route('login.loginPost') }}" method="POST">
+                                    @csrf
                                     <div class="form-outline mb-4">
                                         <input type="email" id="form3Example3cg"
-                                            class="form-control form-control-lg text-white" autocomplete="off"/>
+                                            class="form-control form-control-lg text-white" name="email" value="{{ old('email') }}" autocomplete="off"/>
                                         <label class="form-label text-secondary" for="form3Example3cg">Email</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <input type="password" id="form3Example4cg"
-                                            class="form-control form-control-lg text-white" />
+                                            class="form-control form-control-lg text-white" name="password" value="{{ old('password') }}" />
                                         <label class="form-label text-secondary" for="form3Example4cg">Password</label>
                                     </div>
 
@@ -71,7 +72,15 @@
         </div>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    @vite('resources/js/app.js')
+    <script>
+            var $alertSecond = $('.todo.alert');
+            var timeoutAlert = setTimeout(function() {
+                $alertSecond.removeClass('show').addClass('hide');
+                setTimeout(function() {
+                    $alertSecond.hide();
+                }, 1000);
+            }, 2000);
+    </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
 </body>
 

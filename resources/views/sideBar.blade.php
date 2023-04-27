@@ -31,7 +31,7 @@
       <!-- Apps -->
       <li class="sidebar-nav__section text-sidebar text-uppercase">Apps</li>
       <li class="sidebar-nav__item">
-        <a href="/todo" class="sidebar-nav__link text-decoration-none d-flex py-2">
+        <a href="/todos" class="sidebar-nav__link text-decoration-none d-flex py-2">
           <span class="sidebar-nav__icon flex-shrink-1">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar2-event" viewBox="0 0 16 16">
               <path d="M11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>

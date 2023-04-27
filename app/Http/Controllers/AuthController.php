@@ -41,19 +41,34 @@ class AuthController extends Controller
     }
 
     public function loginPost(Request $request) {
-        $credentials = $request->validate([
-            'email' => 'required|email|unique:users',
+        $request->validate([
+            'email' => 'required|email',
             'password' => 'required|min:6',
         ]);
 
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
- 
-            return redirect()->intended('/todos');
+
+            return redirect('login')->with('success', 'Account Login successfully!');
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Email or password wrong',
         ])->onlyInput('email');
+    }
+
+    public function logout(Request $request) {
+        Auth::logout();
+ 
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+ 
+        return redirect('login');
     }
 }

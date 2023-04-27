@@ -8,7 +8,7 @@
     @vite('resources/sass/app.scss')
 </head>
 <body>
-    <div class="wrapper d-flex">
+    <div class="wrapper d-flex position-relative">
     {{-- sidebar --}}
       @include('sideBar')
     {{-- nav --}}

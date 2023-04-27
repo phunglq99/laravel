@@ -260,7 +260,7 @@
                     <img src="https://coderthemes.com/hyper/saas/assets/images/users/avatar-1.jpg" alt="123" width="32" class="rounded-circle">
                 </span>
                 <span class="d-xl-flex flex-column gap-2 d-none">
-                    <h5 class="my-0 fw-bold">Dominic Keller</h5>
+                    <h5 class="my-0 fw-bold">{{ Auth::user()->name }}</h5>
                     <h6 class="my-0 fw-normal">Founder</h6>
                 </span>
             </a>
@@ -279,15 +279,6 @@
                   </span>
                   <span>My Account</span>
               </a>
-              <a href="{{ route('login.register') }}" class="dropdown-item dropdown-person__text">
-                <span class="me-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-rolodex" viewBox="0 0 16 16">
-                    <path d="M8 9.05a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
-                    <path d="M1 1a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h.5a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h.5a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H6.707L6 1.293A1 1 0 0 0 5.293 1H1Zm0 1h4.293L6 2.707A1 1 0 0 0 6.707 3H15v10h-.085a1.5 1.5 0 0 0-2.4-.63C11.885 11.223 10.554 10 8 10c-2.555 0-3.886 1.224-4.514 2.37a1.5 1.5 0 0 0-2.4.63H1V2Z"/>
-                  </svg>
-                </span>
-                <span>Login</span></span>
-            </a>
               <!-- item-->
               <a href="#" class="dropdown-item dropdown-person__text">
                   <span class="me-2">
@@ -313,13 +304,16 @@
                   <span>Lock Screen</span>
               </a>
               <!-- item-->
-              <a href="#" class="dropdown-item dropdown-person__text">
-                  <span class="me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sign-turn-right" viewBox="0 0 16 16">
-                    <path d="M5 8.5A2.5 2.5 0 0 1 7.5 6H9V4.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L9.41 8.658A.25.25 0 0 1 9 8.466V7H7.5A1.5 1.5 0 0 0 6 8.5V11H5V8.5Z"/>
-                    <path fill-rule="evenodd" d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435Zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134Z"/>
-                  </svg></span>
-                  <span>Logout</span>
-              </a>
+              <form action="{{ route('logout.index') }}" method="POST">
+                @csrf
+                <a href="#" class="dropdown-item dropdown-person__text">
+                    <span class="me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sign-turn-right" viewBox="0 0 16 16">
+                      <path d="M5 8.5A2.5 2.5 0 0 1 7.5 6H9V4.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L9.41 8.658A.25.25 0 0 1 9 8.466V7H7.5A1.5 1.5 0 0 0 6 8.5V11H5V8.5Z"/>
+                      <path fill-rule="evenodd" d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435Zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134Z"/>
+                    </svg></span>
+                    <button type="submit" class="border-white">Logout</button>
+                </a>
+              </form>
           </div>
             </li>
         </ul>
